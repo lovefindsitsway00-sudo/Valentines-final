@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #ffd1dc);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+    .page {
+      display: none;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 35px 28px;
+      max-width: 420px;
+      box-shadow: 0 25px 45px rgba(0,0,0,0.25);
+    }
+    .active { display: block; }
+    h1 { font-size: 2.4rem; margin-bottom: 10px; }
+    p { font-size: 1.05rem; line-height: 1.6; }
+    .cute { font-size: 3rem; margin: 15px 0; }
+    button {
+      margin: 12px 8px 0;
+      background: #fff;
+      color: #ff4d6d;
+      border: none;
+      padding: 12px 26px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover { transform: scale(1.08); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .no-btn { background: #ff4d6d; color: #fff; }
+    .shake { animation: shake 0.4s; }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0d5c0b6b1a.mp3?filename=emotional-piano-ambient-112191.mp3" type="audio/mpeg">
+  </audio>  <!-- Page 1 -->  <div class="page active" id="page1">
+    <h1>Hey Raj 🥺</h1>
+    <div class="cute">🎀💌✨</div>
+    <p>
+      This is something soft, dramatic, and very real.
+      <br />Only for you.
+    </p>
+    <button onclick="startMusic(); nextPage(2)">Click to proceed 💕</button>
+  </div>  <!-- Page 2 -->  <div class="page" id="page2">
+    <h1>A Letter For You, Raj 💗</h1>
+    <div class="cute">📩</div>
+    <p>Click below when you're ready to read it.</p>
+    <button onclick="nextPage(3)">Open the letter 🥹</button>
+  </div>  <!-- Page 3 -->  <div class="page" id="page3">
+    <p style="text-align:left; font-size:1rem;">
+      <b>Hey babyy</b><br /><br />
+      This is our second valentine's day together and cannot thank god enough for that.<br /><br />
+      I know I'm not the girlfriend you had asked for and honestly I don't even deserve you.<br />
+      But I'm so soo soo fucking selfish that I want to make it worth with you.<br /><br />
+      Tu bohot acha hain and aaj ke incident ke baad mujhe realise hua ki main tujhe deserve hi nhi krti.<br />
+      Shayad koi aur hota toh mujhe chhod deta abhi tak and if someone wanted to leave me I cannot even blame them.<br /><br />
+      I'm really sorryyy babyyy.<br />
+      I'm really fucking sorryyyy.<br />
+      For everything. For every little thing that I got upset with you where I'm not supposed to.<br /><br />
+      Mujhe realise hota hain ke tu mujhe asaani se jaane de sakta tha but you chose to stay and I'm thankful for that.
+      <br /><br />
+      <b>So love,</b><br />
+      Will you be my forever valentine?<br />
+      Will you take this sleepyhead as yours?<br />
+      Are you willing to endure everything together?
+    </p>
+    <button onclick="nextPage(4)">Continue 💞</button>
+  </div>  <!-- Page 4 -->  <div class="page" id="page4">
+    <h1>So… 🫶</h1>
+    <p>Will you be my Valentine babyy? 💘</p>
+    <button onclick="yesClicked()">YES ❤️</button>
+    <button class="no-btn" onclick="noClicked(this)">NO 💔</button>
+    <p id="drama" style="margin-top:15px;"></p>
+  </div>  <!-- Page 5 -->  <div class="page" id="page5">
+    <h1>Thank You 🥹❤️</h1>
+    <div class="cute">💖💖💖</div>
+    <p>
+      And you’re mine, love. ❤️<br />My Valentine. My person. My forever.
+    </p>
+  </div>  <script>
+    let noCount = 0;
+    const dramaLines = [
+      "Excuse me??? 😭",
+      "I am literally crying rn 🥲",
+      "Wow okay heart = shattered 💔",
+      "I will actually beat you for this 😤",
+      "You CANNOT escape this question 😈"
+    ];
+
+    function startMusic() {
+      document.getElementById('bgm').play();
+    }
+
+    function nextPage(num) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + num).classList.add('active');
+    }
+
+    function noClicked(btn) {
+      btn.classList.add('shake');
+      setTimeout(() => btn.classList.remove('shake'), 400);
+      document.getElementById('drama').innerText = dramaLines[Math.min(noCount, dramaLines.length - 1)];
+      noCount++;
+      // Make NO button run away
+      btn.style.position = 'absolute';
+      btn.style.top = Math.random() * 70 + '%';
+      btn.style.left = Math.random() * 70 + '%';
+    }
+
+    function yesClicked() {
+      nextPage(5);
+    }
+  </script></body>
+</html>
